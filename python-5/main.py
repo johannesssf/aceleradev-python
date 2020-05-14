@@ -82,22 +82,17 @@ def order_bill_by_value_asc(bill):
     return bill
 
 
+def calc_fare(nocturne, diurne):
+    total = (nocturne + diurne) * 0.36 + (diurne * 0.09)
+    return round(total, 2)
+
+
 def classify_by_phone_number(records):
     bill = []
     for record in records:
         nocturne_min, diurne_min = calc_minutes_in_period(record['start'], record['end'])
-        # t0 = datetime.fromtimestamp(record['start'])
-        # t1 = datetime.fromtimestamp(record['end'])
-
-        # total_sec = (t1-t0).seconds
-        # total_min = total_sec // 60
-
-        # dt_start = t0.strftime('%H:%M:%S %d-%m-%y')
-        # dt_end = t1.strftime('%H:%M:%S %d-%m-%y')
-
-        # print(dt_start, dt_end, nocturne_min, diurne_min, (nocturne_min + diurne_min) * 60)
-        total = (nocturne_min + diurne_min) * 0.36 + (diurne_min * 0.09)
-        bill.append({'source': record['source'], 'total': round(total, 2)})
+        total = calc_fare(nocturne_min, diurne_min)
+        bill.append({'source': record['source'], 'total': total})
 
     return order_bill_by_value_asc(bill)
 

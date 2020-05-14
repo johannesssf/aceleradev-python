@@ -152,14 +152,14 @@ class TestChallenge1:
                 'nocturne': 10,
                 'diurne': 960,
             },
-            # {
-            #     'source': '48-996355555',
-            #     'destination': '48-666666666',
-            #     'end': 1546389000,
-            #     'start': 1546385400,
-            #     'nocturne': 30,
-            #     'diurne': 30,
-            # },
+            {
+                'source': '48-996355555',
+                'destination': '48-666666666',
+                'end': 1546394399,
+                'start': 1546308000,
+                'nocturne': 359,
+                'diurne': 960,
+            },
         ]
 
         for rec in local_records:
