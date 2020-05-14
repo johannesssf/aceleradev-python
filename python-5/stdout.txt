@@ -1,0 +1,14 @@
+============================= test session starts ==============================
+platform linux -- Python 3.8.2, pytest-3.6.2, py-1.5.3, pluggy-0.6.0 -- /home/johannes/.virtualenvs/codenation/bin/python
+cachedir: .pytest_cache
+rootdir: /home/johannes/codenation/python-5, inifile:
+collecting ... collected 6 items
+
+test_main.py::TestChallenge1::test_len PASSED                            [ 16%]
+test_main.py::TestChallenge1::test_order_bill_by_value_asc PASSED        [ 33%]
+test_main.py::TestChallenge1::test_calc_minutes_in_period_nocturne_or_diurne PASSED [ 50%]
+test_main.py::TestChallenge1::test_calc_minutes_in_period_nocturne_and_diurne PASSED [ 66%]
+test_main.py::TestChallenge1::test_calc_minutes_in_period_diurne_and_nocturne PASSED [ 83%]
+test_main.py::TestChallenge1::test_calc_minutes_in_period_nocturne_and_nocturne PASSED [100%]
+
+=========================== 6 passed in 0.01 seconds ===========================
