@@ -18,59 +18,62 @@ records = [
     {'source': '48-996383691', 'destination': '41-885633781', 'end': 1567336500, 'start': 1567307700},
     {'source': '48-996383691', 'destination': '41-885633781', 'end': 1567328820, 'start': 1567328280},
     {'source': '48-996383691', 'destination': '41-885633781', 'end': 1546330439, 'start': 1546329315},
-    {'source': '48-996383691', 'destination': '41-885633781', 'end': 1546389000, 'start': 1546385400},
     # extra case 5
+    {'source': '48-996383691', 'destination': '41-885633781', 'end': 1546389000, 'start': 1546385400},
     {'source': '48-996383692', 'destination': '41-885633782', 'end': 1567562400, 'start': 1567515600},
     {'source': '48-996383693', 'destination': '41-885633783', 'end': 1567559755, 'start': 1567556110},
     # extra case 6
     {'source': '48-996383692', 'destination': '41-885633782', 'end': 1567908000, 'start': 1567843200},
     {'source': '48-996383693', 'destination': '41-885633783', 'end': 1569027720, 'start': 1568969880},
-    {'source': '48-996383693', 'destination': '41-885633783', 'end': 1546387500, 'start': 1546329300},
+    {'source': '48-996383693', 'destination': '41-885633783', 'end': 1546394399, 'start': 1546308000},
 ]
 
 
 def calc_minutes_in_period(start, end):
     t0 = datetime.fromtimestamp(start)
     t1 = datetime.fromtimestamp(end)
-    nocturne_min = 0
-    diurnal_min = 0
+    MARK_06H = datetime(t0.year, t0.month, t0.day, 6, 0, 0)
+    MARK_22H = datetime(t0.year, t0.month, t0.day, 22, 0, 0)
+    MINUTES_16HOURS = 16 * 60
+    noct_minutes = 0
+    diur_minutes = 0
 
     # case 1: call started and finished between 00:00 and 05:59
     if (0 <= t0.hour < 6) and (0 <= t1.hour < 6):
         diff = t1 - t0
-        nocturne_min = diff.seconds // 60
-        return nocturne_min, diurnal_min
+        noct_minutes = diff.seconds // 60
+        return noct_minutes, diur_minutes
 
     # case 2: call started and finished between 06:00 and 21:59
     if (6 <= t0.hour < 22) and (6 <= t1.hour < 22):
         diff = t1 - t0
-        diurnal_min = diff.seconds // 60
-        return nocturne_min, diurnal_min
+        diur_minutes = diff.seconds // 60
+        return noct_minutes, diur_minutes
 
     # case 3: call started and finished between 22:00 and 23:59
     if (22 <= t0.hour < 24) and (22 <= t1.hour < 24):
         diff = t1 - t0
-        nocturne_min = diff.seconds // 60
-        return nocturne_min, diurnal_min
+        noct_minutes = diff.seconds // 60
+        return noct_minutes, diur_minutes
 
     # case 4: call started before 06:00 and finished between 06:00 and 21:59
     if (t0.hour < 6) and (6 <= t1.hour < 22):
-        nocturne_min = (6 - t0.hour) * 60 - t0.minute
-        diurnal_min = (t1.hour - 6) * 60 + t1.minute
-        return nocturne_min, diurnal_min
+        noct_minutes = (MARK_06H - t0).seconds // 60
+        diur_minutes = (t1 - MARK_06H).seconds // 60
+        return noct_minutes, diur_minutes
 
     # case 5: call started between 06:00 and 21:59 and finished after 22:00
     if (6 <= t0.hour < 22) and (22 <= t1.hour):
-        nocturne_min = (22 - t0.hour) * 60 - t0.minute
-        diurnal_min = (t1.hour - 22) * 60 + t1.minute
-        return nocturne_min, diurnal_min
+        noct_minutes = (MARK_22H - t0).seconds // 60
+        diur_minutes = (t1 - MARK_22H).seconds // 60
+        return noct_minutes, diur_minutes
 
     # case 6: call started before 06:00 and finished after 22:00
     if (t0.hour < 6) and (22 <= t1.hour):
-        nocturne_min = (6 - t0.hour) * 60 - t0.minute
-        nocturne_min += (22 - t1.hour) * 60 + t1.minute
-        diurnal_min = 16 * 60
-        return nocturne_min, diurnal_min
+        noct_minutes = (MARK_06H - t0).seconds // 60
+        noct_minutes += (t1 - MARK_22H).seconds // 60
+        diur_minutes = MINUTES_16HOURS
+        return noct_minutes, diur_minutes
 
 
 def order_bill_by_value_asc(bill):

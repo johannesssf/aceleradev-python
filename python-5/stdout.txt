@@ -11,4 +11,4 @@ test_main.py::TestChallenge1::test_calc_minutes_in_period_nocturne_and_diurne PA
 test_main.py::TestChallenge1::test_calc_minutes_in_period_diurne_and_nocturne PASSED [ 83%]
 test_main.py::TestChallenge1::test_calc_minutes_in_period_nocturne_and_nocturne PASSED [100%]
 
-=========================== 6 passed in 0.02 seconds ===========================
+=========================== 6 passed in 0.01 seconds ===========================

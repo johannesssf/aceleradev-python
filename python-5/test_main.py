@@ -99,7 +99,7 @@ class TestChallenge1:
                 'destination': '48-666666666',
                 'end': 1546330439,
                 'start': 1546329315,
-                'nocturne': 5,
+                'nocturne': 4,
                 'diurne': 13,
             },
             {
@@ -157,7 +157,7 @@ class TestChallenge1:
                 'destination': '48-666666666',
                 'end': 1546394399,
                 'start': 1546308000,
-                'nocturne': 359,
+                'nocturne': 479,
                 'diurne': 960,
             },
         ]
