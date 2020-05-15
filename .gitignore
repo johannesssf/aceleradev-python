@@ -1,5 +1,5 @@
 python-5/.DS_Store
-python-5/.pytest_cache/v/cache/nodeids
-python-5/.vscode/settings.json
-python-5/__pycache__/main.cpython-38.pyc
-python-5/__pycache__/test_main.cpython-38-PYTEST.pyc
+python-5/.pytest_cache
+python-5/.vscode
+python-5/__pycache__
+python-5/output.xml

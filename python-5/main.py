@@ -2,6 +2,7 @@ from datetime import datetime
 
 records = [
     {'source': '48-996355555', 'destination': '48-666666666', 'end': 1564610974, 'start': 1564610674},
+    {'source': '48-996355555', 'destination': '48-996383697', 'end': 1564505821, 'start': 1564504821},
     {'source': '41-885633788', 'destination': '41-886383097', 'end': 1564506121, 'start': 1564504821},
     {'source': '48-996383697', 'destination': '41-886383097', 'end': 1564630198, 'start': 1564629838},
     {'source': '48-999999999', 'destination': '41-885633788', 'end': 1564697158, 'start': 1564696258},
@@ -9,23 +10,9 @@ records = [
     {'source': '41-886383097', 'destination': '48-996384099', 'end': 1564505621, 'start': 1564504821},
     {'source': '48-999999999', 'destination': '48-996383697', 'end': 1564505721, 'start': 1564504821},
     {'source': '41-885633788', 'destination': '48-996384099', 'end': 1564505721, 'start': 1564504821},
-    {'source': '48-996355555', 'destination': '48-996383697', 'end': 1564505821, 'start': 1564504821},
     {'source': '48-999999999', 'destination': '41-886383097', 'end': 1564610750, 'start': 1564610150},
     {'source': '48-996383697', 'destination': '41-885633788', 'end': 1564505021, 'start': 1564504821},
     {'source': '48-996383697', 'destination': '41-885633788', 'end': 1564627800, 'start': 1564626000},
-    {'source': '48-996383697', 'destination': '41-885633788', 'end': 1546314000, 'start': 1546313400},
-    # extra case 4
-    {'source': '48-996383691', 'destination': '41-885633781', 'end': 1567336500, 'start': 1567307700},
-    {'source': '48-996383691', 'destination': '41-885633781', 'end': 1567328820, 'start': 1567328280},
-    {'source': '48-996383691', 'destination': '41-885633781', 'end': 1546330439, 'start': 1546329315},
-    # extra case 5
-    {'source': '48-996383691', 'destination': '41-885633781', 'end': 1546389000, 'start': 1546385400},
-    {'source': '48-996383692', 'destination': '41-885633782', 'end': 1567562400, 'start': 1567515600},
-    {'source': '48-996383693', 'destination': '41-885633783', 'end': 1567559755, 'start': 1567556110},
-    # extra case 6
-    {'source': '48-996383692', 'destination': '41-885633782', 'end': 1567908000, 'start': 1567843200},
-    {'source': '48-996383693', 'destination': '41-885633783', 'end': 1569027720, 'start': 1568969880},
-    {'source': '48-996383693', 'destination': '41-885633783', 'end': 1546394399, 'start': 1546308000},
 ]
 
 
@@ -79,26 +66,32 @@ def calc_minutes_in_period(start, end):
 def order_bill_by_value_asc(bill):
     for i in range(len(bill)-1):
         for j in range(i+1, len(bill)):
-            if bill[j]['total'] < bill[i]['total']:
+            if bill[j]['total'] > bill[i]['total']:
                 bill[j], bill[i] = bill[i], bill[j]
 
     return bill
 
 
 def calc_fare(nocturne, diurne):
-    total = (nocturne + diurne) * 0.36 + (diurne * 0.09)
-    return round(total, 2)
+    total = 0.36 + (diurne * 0.09)
+    return total
 
 
 def classify_by_phone_number(records):
-    bill = []
+    bill = {}
     for record in records:
         nocturne_min, diurne_min = calc_minutes_in_period(record['start'], record['end'])
         total = calc_fare(nocturne_min, diurne_min)
-        bill.append({'source': record['source'], 'total': total})
+        if record['source'] in bill:
+            bill[record['source']] = bill[record['source']] + total
+        else:
+            bill[record['source']] = total
+
+    bill = [{'source': k, 'total': round(v, 2)} for k, v in bill.items()]
 
     return order_bill_by_value_asc(bill)
 
 
 if __name__ == "__main__":
-    print(classify_by_phone_number(records))
+    result = classify_by_phone_number(records)
+    print(result)
