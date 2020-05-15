@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from main import classify_by_phone_number, records, order_bill_by_value_asc, \
+from main import classify_by_phone_number, records, order_bill_by_value_desc, \
                  calc_minutes_in_period, calc_fare
 
 
@@ -10,7 +10,7 @@ class TestChallenge1:
         result = classify_by_phone_number(records)
         assert len(result) == 6
 
-    def test_order_bill_by_value_asc(self):
+    def test_order_bill_by_value_desc(self):
         unordered = [
             {'total': 1.2},
             {'total': 2.2},
@@ -25,7 +25,7 @@ class TestChallenge1:
             {'total': 1.2},
             {'total': 1.1},
         ]
-        resutl = order_bill_by_value_asc(unordered)
+        resutl = order_bill_by_value_desc(unordered)
         assert resutl == ordered
 
     def test_calc_minutes_in_period_nocturne_or_diurne(self):
@@ -179,5 +179,5 @@ class TestChallenge1:
         ]
         for rec in local_records:
             noc_min, diu_min = calc_minutes_in_period(rec['start'], rec['end'])
-            total = calc_fare(noc_min, diu_min)
+            total = calc_fare(diu_min)
             assert rec['total'] == round(total, 2)
