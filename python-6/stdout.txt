@@ -1,0 +1,11 @@
+============================= test session starts ==============================
+platform linux -- Python 3.8.2, pytest-3.6.2, py-1.5.3, pluggy-0.6.0 -- /home/johannes/.virtualenvs/codenation/bin/python
+cachedir: .pytest_cache
+rootdir: /home/johannes/codenation/python-6, inifile:
+collecting ... collected 3 items
+
+test_main.py::TestChalange2::test_employer_class PASSED                  [ 33%]
+test_main.py::TestChalange2::test_manager_class PASSED                   [ 66%]
+test_main.py::TestChalange2::test_seller_class PASSED                    [100%]
+
+=========================== 3 passed in 0.01 seconds ===========================
