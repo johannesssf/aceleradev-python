@@ -1,5 +1,7 @@
-python-5/.DS_Store
-python-5/.pytest_cache
-python-5/.vscode
-python-5/__pycache__
-python-5/output.xml
+python-*/.DS_Store
+python-*/.pytest_cache
+python-*/.vscode
+python-*/__pycache__
+python-*/output.xml
+
+.vscode/
