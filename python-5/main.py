@@ -1,4 +1,5 @@
 from datetime import datetime
+from pprint import pprint
 
 records = [
     {'source': '48-996355555', 'destination': '48-666666666', 'end': 1564610974, 'start': 1564610674},
@@ -140,3 +141,4 @@ def classify_by_phone_number(records):
 
 if __name__ == "__main__":
     result = classify_by_phone_number(records)
+    pprint(result)
