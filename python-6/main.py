@@ -1,4 +1,3 @@
-import abc
 
 
 class Department:
@@ -7,75 +6,67 @@ class Department:
         self.code = code
 
 
-class Employee(abc.ABC):
+class Employee():
     def __init__(self, code, name, salary):
+        if type(self) == Employee:
+            raise TypeError("Direct instantiation is not allowed.")
         self.code = code
         self.name = name
         self.salary = salary
         self.hours = 8
-        self.__departament = None
+        self._departament = None
 
-    @abc.abstractmethod
-    def calc_bonus(self, bonus):
-        pass
+    def calc_bonus(self, percentage):
+        raise NotImplementedError("Mandatory subclass implementation")
 
-    @abc.abstractmethod
     def get_hours(self):
-        pass
+        raise NotImplementedError("Mandatory subclass implementation")
 
-    @abc.abstractmethod
     def get_departament(self):
-        pass
+        raise NotImplementedError("Mandatory subclass implementation")
 
-    @abc.abstractmethod
-    def set_department(self, department):
-        pass
+    def set_department(self, name):
+        raise NotImplementedError("Mandatory subclass implementation")
 
 
 class Manager(Employee):
     def __init__(self, code, name, salary):
         super().__init__(code, name, salary)
-        self.set_department(Department('managers', 1))
+        self._departament = Department('managers', 1)
 
-    def calc_bonus(self, bonus=0.15):
-        return self.salary * bonus
+    def calc_bonus(self, percentage=0.15):
+        return self.salary * percentage
 
     def get_hours(self):
         return self.hours
 
     def get_departament(self):
-        return self.__departament.name
+        return self._departament.name
 
-    def set_department(self, department):
-        self.__departament = department
+    def set_department(self, name):
+        self._departament.name = name
 
 
-class Seller(Manager):
+class Seller(Employee):
     def __init__(self, code, name, salary):
         super().__init__(code, name, salary)
-        self.set_department(Department('sellers', 2))
-        self.__sales = 0
+        self._departament = Department('sellers', 2)
+        self._sales = 0
 
-    def calc_bonus(self, bonus=0.15):
-        return self.__sales * bonus
+    def calc_bonus(self, percentage=0.15):
+        return self._sales * percentage
 
     def get_hours(self):
         return self.hours
 
     def get_sales(self):
-        return self.__sales
+        return self._sales
 
     def put_sales(self, value):
-        self.__sales += value
+        self._sales += value
 
     def get_departament(self):
-        return self.__departament.name
+        return self._departament.name
 
-    def set_department(self, department):
-        self.__departament = department
-
-
-if __name__ == "__main__":
-    # employee = Employee(1, 2, 2)
-    manager = Manager(1, 'Johannes', 1000)
-    print(manager.get_departament())
+    def set_department(self, name):
+        self._departament.name = name
