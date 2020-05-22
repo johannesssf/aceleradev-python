@@ -13,24 +13,24 @@ class TestChalange2:
     # `Employee`, implemente-os se for necessários.
     def test_mandatory_methods(self):
         manager = Manager(123, 123 , 123)
-        manager.get_departament()
-        manager.set_departament(None)
+        manager.get_department()
+        manager.set_department(None)
 
         seller = Seller(123, 123 , 123)
-        seller.get_departament()
-        seller.set_departament(None)
+        seller.get_department()
+        seller.set_department(None)
 
     # Proteja o atributo `department` da classe `Manager` para que seja
     # acessado somente através do método `get_department`.
     def test_manager_class(self):
         manager = Manager(123, 123, 123)
         with pytest.raises(AttributeError):
-            manager.departament.name
+            manager.department.name
 
     def test_seller_class(self):
         seller = Seller(123, 123, 123)
         with pytest.raises(AttributeError):
-            seller.departament.name = 'coders'
+            seller.department.name = 'coders'
 
     # Faça a correção dos métodos para que a herança funcione
     # corretamente.
@@ -38,14 +38,14 @@ class TestChalange2:
         manager = Manager(123, 123 , 123)
         manager.calc_bonus()
         manager.get_hours()
-        manager.get_departament()
-        manager.set_departament(None)
+        manager.get_department()
+        manager.set_department(None)
 
         seller = Seller(123, 123 , 123)
         seller.calc_bonus()
         seller.get_hours()
-        seller.get_departament()
-        seller.set_departament(None)
+        seller.get_department()
+        seller.set_department(None)
 
     # Proteja o atributo `sales` da classe `Seller` para que não seja
     # acessado diretamente, crie um método chamado `get_sales` para
@@ -61,22 +61,22 @@ class TestChalange2:
         assert seller.get_sales() == sale_one + sale_two
 
     # Implemente o método `get_department` que retorna o nome do
-    # departamento e `set_departament` que muda o nome do departamento
+    # departmento e `set_department` que muda o nome do departmento
     # para as classes `Manager` e `Seller`
-    def test_set_get_departament_name(self):
+    def test_set_get_department_name(self):
         manager = Manager(123, 123 , 123)
-        old_dep_name = manager.get_departament()
+        old_dep_name = manager.get_department()
         new_dep_name = 'top_managers'
-        manager.set_departament(new_dep_name)
-        assert manager.get_departament() != old_dep_name
-        assert manager.get_departament() == new_dep_name
+        manager.set_department(new_dep_name)
+        assert manager.get_department() != old_dep_name
+        assert manager.get_department() == new_dep_name
 
         seller = Seller(123, 123 , 123)
-        old_dep_name = seller.get_departament()
+        old_dep_name = seller.get_department()
         new_dep_name = 'top_sellers'
-        seller.set_departament(new_dep_name)
-        assert seller.get_departament() != old_dep_name
-        assert seller.get_departament() == new_dep_name
+        seller.set_department(new_dep_name)
+        assert seller.get_department() != old_dep_name
+        assert seller.get_department() == new_dep_name
 
     # Padronize uma carga horária de 8 horas para todos os funcionários.
     def test_workload_hours(self):
