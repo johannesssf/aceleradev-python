@@ -14,11 +14,11 @@ class TestChalange2:
     def test_mandatory_methods(self):
         manager = Manager(123, 123 , 123)
         manager.get_departament()
-        manager.set_department(None)
+        manager.set_departament(None)
 
         seller = Seller(123, 123 , 123)
         seller.get_departament()
-        seller.set_department(None)
+        seller.set_departament(None)
 
     # Proteja o atributo `department` da classe `Manager` para que seja
     # acessado somente através do método `get_department`.
@@ -27,6 +27,11 @@ class TestChalange2:
         with pytest.raises(AttributeError):
             manager.departament.name
 
+    def test_seller_class(self):
+        seller = Seller(123, 123, 123)
+        with pytest.raises(AttributeError):
+            seller.departament.name = 'coders'
+
     # Faça a correção dos métodos para que a herança funcione
     # corretamente.
     def test_inherited_methods(self):
@@ -34,13 +39,13 @@ class TestChalange2:
         manager.calc_bonus()
         manager.get_hours()
         manager.get_departament()
-        manager.set_department(None)
+        manager.set_departament(None)
 
         seller = Seller(123, 123 , 123)
         seller.calc_bonus()
         seller.get_hours()
         seller.get_departament()
-        seller.set_department(None)
+        seller.set_departament(None)
 
     # Proteja o atributo `sales` da classe `Seller` para que não seja
     # acessado diretamente, crie um método chamado `get_sales` para
@@ -56,20 +61,20 @@ class TestChalange2:
         assert seller.get_sales() == sale_one + sale_two
 
     # Implemente o método `get_department` que retorna o nome do
-    # departamento e `set_department` que muda o nome do departamento
+    # departamento e `set_departament` que muda o nome do departamento
     # para as classes `Manager` e `Seller`
     def test_set_get_departament_name(self):
         manager = Manager(123, 123 , 123)
         old_dep_name = manager.get_departament()
         new_dep_name = 'top_managers'
-        manager.set_department(new_dep_name)
+        manager.set_departament(new_dep_name)
         assert manager.get_departament() != old_dep_name
         assert manager.get_departament() == new_dep_name
 
         seller = Seller(123, 123 , 123)
         old_dep_name = seller.get_departament()
         new_dep_name = 'top_sellers'
-        seller.set_department(new_dep_name)
+        seller.set_departament(new_dep_name)
         assert seller.get_departament() != old_dep_name
         assert seller.get_departament() == new_dep_name
 
@@ -86,9 +91,3 @@ class TestChalange2:
         seller = Seller(123, 123 , 1000)
         seller.put_sales(20)
         assert seller.calc_bonus() == (20 * 0.15)
-
-
-    def test_seller_class(self):
-        seller = Seller(123, 123, 123)
-        with pytest.raises(AttributeError):
-            seller.departament.name = 'coders'
