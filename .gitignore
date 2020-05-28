@@ -5,3 +5,7 @@ python-*/__pycache__
 python-*/output.xml
 
 .vscode/
+
+.ipynb_checkpoints/
+auto_avaliacao_*
+fast_tests.ipynb
