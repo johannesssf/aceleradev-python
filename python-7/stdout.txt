@@ -1,0 +1,18 @@
+============================= test session starts ==============================
+platform linux -- Python 3.8.2, pytest-3.6.2, py-1.5.3, pluggy-0.6.0 -- /home/johannes/.virtualenvs/codenation/bin/python
+cachedir: .pytest_cache
+rootdir: /home/johannes/codenation/python-7, inifile:
+collecting ... collected 9 items
+
+test_main.py::test_get_temperature_by_lat_lng PASSED                     [ 11%]
+test_main.py::test_get_temperature_zero_degree PASSED                    [ 22%]
+test_main.py::test_get_temperature_json_without_currently_field PASSED   [ 33%]
+test_main.py::test_get_temperature_json_without_temperature_field PASSED [ 44%]
+test_main.py::test_get_temperature_invalid_lat PASSED                    [ 55%]
+test_main.py::test_get_temperature_invalid_lng PASSED                    [ 66%]
+test_main.py::test_get_temperature_connection_error_exception PASSED     [ 77%]
+test_main.py::test_get_temperature_requests_timeout_exception PASSED     [ 88%]
+test_main.py::test_get_temperature_requests_too_many_redirects_exception PASSED [100%]
+
+------ generated xml file: /home/johannes/codenation/python-7/output.xml -------
+=========================== 9 passed in 0.08 seconds ===========================
