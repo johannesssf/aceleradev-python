@@ -7,32 +7,37 @@ from jwt.exceptions import (
 )
 
 
-TOKEN_ALGORITHM = 'HS256'
+DFL_ALGORITHM = 'HS256'
+DFL_SECRET = 'acelera'
 
 
-def create_token(data, secret):
+def create_token(data, secret, algorithm=DFL_ALGORITHM):
     """Generates a simple JWT token.
 
     Args:
         data (dict): Data to be inserted into the token
-        secret (str): A strong secret crypt the token
+        secret (str): A strong secret to crypt the token
+        algorithm (str, optional): Which algorithm to use
+        for encryptation (defaults to DFL_ALGORITHM)
 
     Returns:
-        jwt: Token or None
+        jwt: Token or None if something went wrong
     """
     try:
-        token = jwt.encode(data, secret, algorithm=TOKEN_ALGORITHM)
+        token = jwt.encode(data, secret, algorithm=DFL_ALGORITHM)
     except TypeError as ex:
         print(f"ERROR: {ex}")
         token = None
     return token
 
 
-def verify_signature(token):
+def verify_signature(token, secret=DFL_SECRET):
     """Verifies a JWT token signature.
 
     Args:
         token (jwt): Token
+        secret (str, optional): Secret to validate signature (defaults
+        to DFL_SECRET)
 
     Raises:
         ex: Exceptions raised by jwt.decode
@@ -41,7 +46,7 @@ def verify_signature(token):
         dict: Token payload or error code
     """
     try:
-        payload = jwt.decode(token, 'acelera', algorithms=TOKEN_ALGORITHM)
+        payload = jwt.decode(token, secret, algorithms=DFL_ALGORITHM)
         return payload
 
     except (InvalidSignatureError, DecodeError):
