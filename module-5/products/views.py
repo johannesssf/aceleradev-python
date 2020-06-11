@@ -27,3 +27,27 @@ def create_produtct(request):
         'form': form
     }
     return render(request, 'products/create.html', context=context)
+
+
+def delete_product(request, product_id):
+    product = Product.objects.get(pk=product_id)
+    product.delete()
+    return redirect('products:list')
+
+
+def update_product(request, product_id):
+    product = Product.objects.get(pk=product_id)
+
+    if request.method == 'POST':
+        form = ProductModelForm(data=request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect('products:list')
+    else:
+        form = ProductModelForm(instance=product)
+
+        context = {
+            'form': form
+        }
+
+        return render(request, 'products/update.html', context=context)
