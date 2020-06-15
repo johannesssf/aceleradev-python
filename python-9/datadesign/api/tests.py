@@ -56,13 +56,14 @@ class EventModelTestCase(TestCase):
         agent.save()
 
         event = Event(
-            level='info',
+            level='none',
             data='Some data test',
-            archived=False,
+            arquivado=False,
             date=timezone.now(),
             agent=agent,
             user=user,
         )
+        event.full_clean()
         event.save()
         ev = Event.objects.get(pk=event.pk)
         self.assertEqual(event.level, ev.level)

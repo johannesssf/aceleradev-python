@@ -2,14 +2,15 @@
 platform linux -- Python 3.8.2, pytest-3.6.2, py-1.5.3, pluggy-0.6.0 -- /home/johannes/venvs/aceleradev/bin/python
 cachedir: .pytest_cache
 rootdir: /home/johannes/codenation/python-9, inifile:
-collecting ... collected 6 items
+collecting ... collected 8 items
 
-test_submit.py::TestChallenge9::test_agent PASSED                        [ 16%]
-test_submit.py::TestChallenge9::test_event PASSED                        [ 33%]
-test_submit.py::TestChallenge9::test_event1 PASSED                       [ 50%]
-test_submit.py::TestChallenge9::test_group PASSED                        [ 66%]
-test_submit.py::TestChallenge9::test_user PASSED                         [ 83%]
-test_submit.py::TestChallenge9::test_user_group PASSED                   [100%]
+test_main.py::TestChallenge9::test_1 PASSED                              [ 12%]
+test_main.py::TestChallenge9::test_2 PASSED                              [ 25%]
+test_main.py::TestChallenge9::test_3 PASSED                              [ 37%]
+test_main.py::TestChallenge9::test_4 PASSED                              [ 50%]
+test_main.py::TestChallenge9::test_aget_invalid_address PASSED           [ 62%]
+test_main.py::TestChallenge9::test_event_invalid_level PASSED            [ 75%]
+test_main.py::TestChallenge9::test_user_invalid_email PASSED             [ 87%]
+test_main.py::TestChallenge9::test_user_password_less_then_eight PASSED  [100%]
 
------- generated xml file: /home/johannes/codenation/python-9/output.xml -------
-=========================== 6 passed in 0.18 seconds ===========================
+=========================== 8 passed in 0.18 seconds ===========================

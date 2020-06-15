@@ -18,10 +18,10 @@ class User(models.Model):
 
 class Agent(models.Model):
     name = models.CharField('Nome', max_length=50)
-    status = models.BooleanField('Status')
+    status = models.BooleanField('Status', default=False)
     env = models.CharField('Env', max_length=20)
     version = models.CharField('Versão', max_length=5)
-    address = models.GenericIPAddressField('Endereço', max_length=39)
+    address = models.GenericIPAddressField('Endereço', protocol='IPv4')
 
     def __str__(self):
         return self.name
@@ -37,7 +37,7 @@ class Event(models.Model):
     )
     level = models.CharField('Nível', max_length=20, choices=LEVELS)
     data = models.TextField('Dados')
-    arquivado = models.BooleanField('Arquivado')
+    arquivado = models.BooleanField('Arquivado', default=False)
     date = models.DateField('Data', auto_now_add=True)
     agent = models.ForeignKey('Agent', on_delete=models.DO_NOTHING)
     user = models.ForeignKey('User', on_delete=models.DO_NOTHING)
