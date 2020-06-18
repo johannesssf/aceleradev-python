@@ -18,7 +18,7 @@ def _order_by_repetition(array):
 
 @api_view(['POST'])
 def lambda_function(request):
-    question = request.data.get('question', None)
+    question = request.data.get('question')
 
     if question is None:
         return Response({'message': 'question not found'},
