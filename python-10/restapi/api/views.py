@@ -10,8 +10,7 @@ def _order_by_repetition(array):
     response = []
 
     for elem, rep in counter.most_common():
-         for _ in range(rep):
-             response.append(elem)
+        response.extend([elem] * rep)
 
     return response
 

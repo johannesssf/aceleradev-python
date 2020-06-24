@@ -10,15 +10,14 @@ def _order_by_repetition(array):
     response = []
 
     for elem, rep in counter.most_common():
-         for _ in range(rep):
-             response.append(elem)
+        response.extend([elem] * rep)
 
     return response
 
 
 @api_view(['POST'])
 def lambda_function(request):
-    question = request.data.get('question', None)
+    question = request.data.get('question')
 
     if question is None:
         return Response({'message': 'question not found'},
